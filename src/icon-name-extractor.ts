@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { readdirSync } from 'fs'
 import finder from 'find-package-json'
+import { readdirSync } from 'fs'
 
 const packageInfo = finder().next().value
 
