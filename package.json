@@ -1,5 +1,5 @@
 {
-  "name": "icon-css-import-generator",
+  "name": "icon-name-extractor",
   "version": "1.0.1",
   "description": "create vui icon css import file with script",
   "main": "index.js",
