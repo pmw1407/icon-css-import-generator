@@ -1,5 +1,5 @@
-import finder from 'find-package-json'
 import { readdirSync } from 'fs'
+import finder from 'find-package-json'
 
 const packageInfo = finder().next().value
 
