@@ -1,15 +1,16 @@
 {
   "name": "icon-name-extractor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "create vui icon css import file with script",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "yarn start",
-    "start": "npx tsc && node src/icon-css-import.ts",
+    "start": "tsc src/icon-name-extractor.ts",
     "type": "npx tsc"
   },
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pmw1407/icon-css-import-generator.git"
