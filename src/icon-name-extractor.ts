@@ -55,6 +55,6 @@ console.log(availableIconNames, availableIconNameCss)
 writeFile(`${destination}/AvailableIconNames.ts`, availableIconNames, (e) => {
   console.log(e)
 })
-writeFile(`${destination}/AvailableIconNameCss.ts`, availableIconNameCss, (e) => {
+writeFile(`${destination}/AvailableIconNames.scss`, availableIconNameCss, (e) => {
   console.log(e)
 })
