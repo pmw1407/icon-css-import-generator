@@ -1,6 +1,6 @@
 {
   "name": "icon-name-extractor",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "create vui icon css import file with script",
   "bin": "build/icon-name-extractor.js",
   "main": "index.js",

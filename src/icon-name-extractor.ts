@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import finder from 'find-package-json'
-import { readdirSync } from 'fs'
+import { readdirSync, writeFileSync } from 'fs'
 
 const packageInfo = finder().next().value
 
@@ -12,24 +12,45 @@ const root = config['root']
 
 const newLine = '\n'
 
-const makeAvailableIconNames = (iconName: string) => {
-  return `${iconName},${newLine}`
+const makeAvailableIconNames = (iconName: string, isNewLine: boolean) => {
+  return isNewLine ? `'${iconName},${newLine}'` : `'${iconName}',`
 }
 
-let content = 'export const availableDesignedIconNames = [\n'
-
 const generateAvailableIconNames = () => {
+  let content = 'export const availableDesignedIconNames = [\n'
+
   const iconFiles = readdirSync(root, { withFileTypes: true })
 
   iconFiles.forEach((_file) => {
     const fileName = _file.name.split('.')[0]
 
-    content += makeAvailableIconNames(fileName)
+    content += makeAvailableIconNames(fileName, true)
   })
 
   content += '] as const'
+
+  return content
 }
 
-generateAvailableIconNames()
+const generateAvailableIconNameCss = () => {
+  let content = '$iconNames: '
 
-console.log(content)
+  const iconFiles = readdirSync(root, { withFileTypes: true })
+
+  iconFiles.forEach((_file) => {
+    const fileName = _file.name.split('.')[0]
+
+    content += makeAvailableIconNames(fileName, false)
+  })
+
+  content += ';'
+
+  return content
+}
+
+const availableIconNames = generateAvailableIconNames()
+const availableIconNameCss = generateAvailableIconNameCss()
+console.log(availableIconNames, availableIconNameCss)
+
+writeFileSync(`${destination}/AvailableIconNames.ts`, availableIconNames)
+writeFileSync(`${destination}/AvailableIconNameCss.ts`, availableIconNameCss)
