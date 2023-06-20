@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { readdirSync } from 'fs'
 import finder from 'find-package-json'
 
