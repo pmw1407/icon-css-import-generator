@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 import finder from 'find-package-json';
-import { readdirSync, writeFileSync } from 'fs';
+import { readdirSync, writeFile } from 'fs';
 const packageInfo = finder().next().value;
 const config = packageInfo['icon-import-generator'];
 const destination = config['destination'];
 const root = config['root'];
 const newLine = '\n';
 const makeAvailableIconNames = (iconName, isNewLine) => {
-    return isNewLine ? `'${iconName},${newLine}'` : `'${iconName}',`;
+    return isNewLine ? `'${iconName}',${newLine}` : `'${iconName}',`;
 };
 const generateAvailableIconNames = () => {
     let content = 'export const availableDesignedIconNames = [\n';
@@ -32,5 +32,9 @@ const generateAvailableIconNameCss = () => {
 const availableIconNames = generateAvailableIconNames();
 const availableIconNameCss = generateAvailableIconNameCss();
 console.log(availableIconNames, availableIconNameCss);
-writeFileSync(`${destination}/AvailableIconNames.ts`, availableIconNames);
-writeFileSync(`${destination}/AvailableIconNameCss.ts`, availableIconNameCss);
+writeFile(`${destination}/AvailableIconNames.ts`, availableIconNames, (e) => {
+    console.log(e);
+});
+writeFile(`${destination}/AvailableIconNameCss.ts`, availableIconNameCss, (e) => {
+    console.log(e);
+});

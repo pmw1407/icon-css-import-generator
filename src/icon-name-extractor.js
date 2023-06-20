@@ -9,7 +9,7 @@ var destination = config['destination'];
 var root = config['root'];
 var newLine = '\n';
 var makeAvailableIconNames = function (iconName, isNewLine) {
-    return isNewLine ? "'".concat(iconName, ",").concat(newLine, "'") : "'".concat(iconName, "',");
+    return isNewLine ? "'".concat(iconName, "',").concat(newLine) : "'".concat(iconName, "',");
 };
 var generateAvailableIconNames = function () {
     var content = 'export const availableDesignedIconNames = [\n';
@@ -34,5 +34,9 @@ var generateAvailableIconNameCss = function () {
 var availableIconNames = generateAvailableIconNames();
 var availableIconNameCss = generateAvailableIconNameCss();
 console.log(availableIconNames, availableIconNameCss);
-(0, fs_1.writeFileSync)("".concat(destination, "/AvailableIconNames.ts"), availableIconNames);
-(0, fs_1.writeFileSync)("".concat(destination, "/AvailableIconNameCss.ts"), availableIconNameCss);
+(0, fs_1.writeFile)("".concat(destination, "/AvailableIconNames.ts"), availableIconNames, function (e) {
+    console.log(e);
+});
+(0, fs_1.writeFile)("".concat(destination, "/AvailableIconNameCss.ts"), availableIconNameCss, function (e) {
+    console.log(e);
+});

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import finder from 'find-package-json'
-import { readdirSync, writeFileSync } from 'fs'
+import { readdirSync, writeFile } from 'fs'
 
 const packageInfo = finder().next().value
 
@@ -13,7 +13,7 @@ const root = config['root']
 const newLine = '\n'
 
 const makeAvailableIconNames = (iconName: string, isNewLine: boolean) => {
-  return isNewLine ? `'${iconName},${newLine}'` : `'${iconName}',`
+  return isNewLine ? `'${iconName}',${newLine}` : `'${iconName}',`
 }
 
 const generateAvailableIconNames = () => {
@@ -52,5 +52,9 @@ const availableIconNames = generateAvailableIconNames()
 const availableIconNameCss = generateAvailableIconNameCss()
 console.log(availableIconNames, availableIconNameCss)
 
-writeFileSync(`${destination}/AvailableIconNames.ts`, availableIconNames)
-writeFileSync(`${destination}/AvailableIconNameCss.ts`, availableIconNameCss)
+writeFile(`${destination}/AvailableIconNames.ts`, availableIconNames, (e) => {
+  console.log(e)
+})
+writeFile(`${destination}/AvailableIconNameCss.ts`, availableIconNameCss, (e) => {
+  console.log(e)
+})
